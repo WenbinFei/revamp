@@ -25,7 +25,7 @@ gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
 -sOutputFile=output.pdf someBigFile.pdf
 ```
 
-### PDF Decryption
+### 2.2 PDF Decryption
 **Method"**: Using a python library: pikepdf
 
 Step 1: Install pikepdf by typing the following command on terminal.

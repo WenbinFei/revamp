@@ -23,30 +23,6 @@ logger = logging.getLogger(__name__)
 
 # Create functions
 
-def decrypte(input_file, output_file):
-	"""
-	Decrypte PDF using python library: pikepdf
-	Install pikepdf using the folloaing bash comman
-		pip install pikepdf
-
-	:type input_file: string
-	:param input_file: the directory of the PDF before decryption
-
-	:type output_file: string
-	:param output_file: the directory of the PDF after decryption
-	"""
-	start_time = time.time()
-	try:
-		import pikepdf					
-	except: 
-		logger.error(traceback.format_exc())		
-	else:
-		pdf = pikepdf.open(input_file)
-		pdf.save(output_file)
-		stop_time = time.time()
-		dt = stop_time - start_time
-		logger.info(f"[decrypte completed] {input_file} in {dt} s")		
-		
 def compress(input_file, output_file, resolution):
 	"""
 	Compress PDF using bash command of Ghostscript on terminal shell.
@@ -77,8 +53,32 @@ def compress(input_file, output_file, resolution):
 		dt = stop_time - start_time
 		logger.info("[decrypte completed] {input_file} in {dt}")
 
+def decrypte(input_file, output_file):
+	"""
+	Decrypte PDF using python library: pikepdf
+	Install pikepdf using the folloaing bash comman
+		pip install pikepdf
+
+	:type input_file: string
+	:param input_file: the directory of the PDF before decryption
+
+	:type output_file: string
+	:param output_file: the directory of the PDF after decryption
+	"""
+	start_time = time.time()
+	try:
+		import pikepdf					
+	except: 
+		logger.error(traceback.format_exc())		
+	else:
+		pdf = pikepdf.open(input_file)
+		pdf.save(output_file)
+		stop_time = time.time()
+		dt = stop_time - start_time
+		logger.info(f"[decrypte completed] {input_file} in {dt} s")	
+
 # Test functions
 if __name__ == '__main__':
-	decrypte('../tests/in.pdf', '../tests/out.pdf')
+	# decrypte('../tests/in.pdf', '../tests/out.pdf')
 
 
