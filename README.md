@@ -4,11 +4,11 @@ Email:	 wenbinfei@gmail.com
 System:  Ubuntu  
 Language: Bash & Python3*
 
-## 1. File Management on Operating System
+## File Management on Operating System
 
 
-## 2. PDF
-### 2.1 PDF compress
+## PDF
+### PDF compress
 *If you do not worry about safety, you can do the PDF compression on the website [PDF Compressor](https://pdfcompressor.com/)*
 
 **Method**: [Ghostscript](https://www.ghostscript.com/doc/current/Use.htm) command on terminal.
@@ -25,7 +25,7 @@ gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook \
 -sOutputFile=output.pdf someBigFile.pdf
 ```
 
-### 2.2 PDF Decryption
+### PDF Decryption
 **Method"**: Using a python library: pikepdf
 
 Step 1: Install pikepdf by typing the following command on terminal.
