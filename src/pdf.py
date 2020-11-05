@@ -12,13 +12,16 @@ Todo:
 """
 
 import os
-import logging
+import logging.config
 import time
+import traceback
 
 # Create logger
-logging.basicConfig(filename = "../revamp.log",
-					level = logging.DEBUG)
-logger = logging.getLogger()
+logging.config.fileConfig(fname='logging.ini')
+logger = logging.getLogger(__name__)
+
+
+# Create functions
 
 def decrypte(input_file, output_file):
 	"""
@@ -34,18 +37,15 @@ def decrypte(input_file, output_file):
 	"""
 	start_time = time.time()
 	try:
-		import pikepdf 
+		import pikepdf					
+	except: 
+		logger.error(traceback.format_exc())		
+	else:
 		pdf = pikepdf.open(input_file)
 		pdf.save(output_file)
-		return 0		
-	except ImportError as err:
-		logger.error(err)
-		raise
-	else:
 		stop_time = time.time()
 		dt = stop_time - start_time
-		logger.info(f"-- Completed decrypting {input_file} in {dt}")
-		
+		logger.info(f"[decrypte completed] {input_file} in {dt} s")		
 		
 def compress(input_file, output_file, resolution):
 	"""
@@ -70,14 +70,15 @@ def compress(input_file, output_file, resolution):
 		-dNOPAUSE -dBATCH -dColorImageResolution={resolution} \
 		-sOutputFile={output_file} {input_file}'''
 		os.system(bash_command)
-	except SystemError as err:
-		logger.error(err)
-		raise
+	except : 
+		logger.error(traceback.format_exc())
 	else:
 		stop_time = time.time()
 		dt = stop_time - start_time
-		logger.info("-- Completed decrypting {input_file} in {dt}")
+		logger.info("[decrypte completed] {input_file} in {dt}")
 
 # Test functions
-if __name__ == '__main__'
-decrypte('../test/in.pdf', '../test/out.pdf')
+if __name__ == '__main__':
+	decrypte('../tests/in.pdf', '../tests/out.pdf')
+
+
