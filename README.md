@@ -4,7 +4,7 @@ Email:	 wenbinfei@gmail.com
 System:  Ubuntu  
 Language: Bash & Python3*
 
-**Revamp's documentation** is avaliable by [clicking here](docs/_build/html/index.html).
+**Revamp's documentation** is avaliable [here](docs/_build/html/index.html).
 
 * [Revamp - A collection of methods for file management](#s1)
   * [File Management on Operating System](#s1-1)
