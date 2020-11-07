@@ -63,18 +63,31 @@ def dir_list(input_dir, output_path, only_folder=True, certain_file=False):
     start_time = time.time()
     try:
         sub_dirs = os.listdir(input_dir)
+        print(sub_dirs)
+        if only_folder == True:
+            for term in sub_dirs:
+                print (term)
+                if ("." in term):  #files usually has an estension name with a symbol '.'
+                    sub_dirs.remove(term)
+        print(sub_dirs)
+        counter = 0
         with open(output_path,'w') as f:
-            for sub_dir in sub_dirs:
-                if only_folder == True:
-                    if not("." in sub_dir):  #files usually has an estension name with a symbol '.'
-                        f.write(input_dir + '/' + sub_dir + '\n')
-                else: # folders and files
-                    if certain_file:
-                        print((certain_file in sub_dir))
-                        if certain_file in sub_dir:
-                            f.write(input_dir + '/' + sub_dir + '\n')                
-                    else:                
-                        f.write(input_dir + '/' + sub_dir + '\n')
+            while counter != (len(sub_dirs)) - 1: 
+                sub_dir = sub_dirs[counter]         
+                if certain_file:
+                    if certain_file in sub_dir:
+                        f.write(input_dir + '/' + sub_dir + '\n')                
+                else:                
+                    f.write(input_dir + '/' + sub_dir + '\n')
+                counter += 1
+
+            sub_dir = sub_dirs[-1]  # only for the last line without '\n'        
+            if certain_file:
+                if certain_file in sub_dir:
+                    f.write(input_dir + '/' + sub_dir)                
+            else:                
+                f.write(input_dir + '/' + sub_dir)
+            
     except: 
         logger.error('[dir_list failed]')
         logger.error(traceback.format_exc())
@@ -152,7 +165,7 @@ def batch_rename_file(input_dir, file_extension, re_match, str_new):
     it do same as using e.g. re.sub('-v([0-9]*)' ,'-v800', path)      
 
     :type input_dir: string
-    :param input_dir: a dir.txt file save the directory of the folders containing the certain files
+    :param input_dir: a dir_list.txt file save the directory of the folders containing the certain files
 
     :type file_extension: list
     :param file_extension: a list of certain extension of file
@@ -183,10 +196,40 @@ def batch_rename_file(input_dir, file_extension, re_match, str_new):
         dt = stop_time - start_time
         logger.info("[batch_rename_file completed] {} in {:.4f} s".format(input_dir, dt))
 
+def batch_delete_folder(input_dir, sub_folder = False):    
+    """
+    Batch delete folders. Or specify a sub_folder to be deleted
+
+    :type input_dir: string
+    :param input_dir: a dir_list.txt file save the directory of the folders to be named
+
+    :type sub_folder: list
+    :param sub_folder: default is False not for subfolder.
+     Giving a list of subfolders to only delete the subfolders
+    """
+    start_time = time.time()
+    try:
+        path_list = [line.strip() for line in open(input_dir,'r')]        
+        for path in path_list:       
+            if isinstance(sub_folder, list):
+                for name in sub_folder:
+                    path_remove = path + '/' + name
+                    shutil.rmtree(path_remove)
+            else:
+                shutil.rmtree(path)
+    except: 
+        logger.error('[batch_delete_folder failed]')
+        logger.error(traceback.format_exc())
+    else:
+        stop_time = time.time()
+        dt = stop_time - start_time
+        logger.info("[batch_delete_folder completed] {} in {:.4f} s".format(input_dir, dt))
+
 if __name__ == '__main__':
     # test copy_filter on ubuntu. I used WSL on my windows computer
     # copy_filter(r"/mnt/c/Wenbin/GitHub/revamp/tests/individual/", r"/mnt/c/Wenbin/GitHub/revamp/tests/individual-copy_filter/", ['txt', 'JPG'])
     # batch_rename_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", '-v([0-9]*)', '-v800')
     # batch_rename_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['txt'], '-v([0-9]*)', '-v200')
-    # dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt')
-    folder_tree(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['a', 'b', 'c'])
+    dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt', True)
+    # folder_tree(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['a', 'b', 'c'])
+    # batch_delete_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt")

@@ -1,2 +1,3 @@
-C:\Wenbin\GitHub\revamp\tests/a-v1600
-
+C:\Wenbin\GitHub\revamp\tests/in.pdf
+C:\Wenbin\GitHub\revamp\tests/individual
+C:\Wenbin\GitHub\revamp\tests/individual-copy_filter
