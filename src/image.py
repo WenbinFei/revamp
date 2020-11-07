@@ -16,8 +16,8 @@ import numpy as np
 import cv2
 
 # Create logger
-logging.config.fileConfig(fname='logging.ini')
-logger = logging.getLogger(__name__)
+import logger_ini
+logger = logger_ini.logger_run()
 
 def crop_journal_image(path):
     """

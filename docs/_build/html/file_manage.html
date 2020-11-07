@@ -33,8 +33,123 @@
 
           <div class="body" role="main">
             
-  <div class="section" id="file-manage-module">
-<h1>file_manage module<a class="headerlink" href="#file-manage-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-file_manage">
+<span id="file-manage-module"></span><h1>file_manage module<a class="headerlink" href="#module-file_manage" title="Permalink to this headline">¶</a></h1>
+<p>Batch deal with your files.</p>
+<dl class="py function">
+<dt id="file_manage.batch_delete_file">
+<code class="sig-prename descclassname">file_manage.</code><code class="sig-name descname">batch_delete_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dir</span></em>, <em class="sig-param"><span class="n">file_limit</span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manage.batch_delete_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Batch delete certatin files in a folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>string</em>) – a dir_list.txt file save the directory of the folders to be named</p></li>
+<li><p><strong>file_limit</strong> (<em>list</em>) – a list of certain extension of file, or the filename</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="file_manage.batch_delete_folder">
+<code class="sig-prename descclassname">file_manage.</code><code class="sig-name descname">batch_delete_folder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dir</span></em>, <em class="sig-param"><span class="n">sub_folder</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manage.batch_delete_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Batch delete folders. Or specify a sub_folder to be deleted</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>string</em>) – a dir_list.txt file save the directory of the folders to be named</p></li>
+<li><p><strong>sub_folder</strong> (<em>list</em>) – default is False not for subfolder.
+Giving a list of subfolders to only delete the subfolders</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="file_manage.batch_rename_file">
+<code class="sig-prename descclassname">file_manage.</code><code class="sig-name descname">batch_rename_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dir</span></em>, <em class="sig-param"><span class="n">file_extension</span></em>, <em class="sig-param"><span class="n">re_match</span></em>, <em class="sig-param"><span class="n">str_new</span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manage.batch_rename_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the the name of files with certain extension
+it do same as using e.g. re.sub(‘-v([0-9]*)’ ,’-v800’, path)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>string</em>) – a dir_list.txt file save the directory of the folders containing the certain files</p></li>
+<li><p><strong>file_extension</strong> (<em>list</em>) – a list of certain extension of file</p></li>
+<li><p><strong>re_match</strong> (<em>string</em>) – regular express to locate the string to be changed.</p></li>
+<li><p><strong>str_new</strong> (<em>string</em>) – new string to change the string in the old folders name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="file_manage.batch_rename_folder">
+<code class="sig-prename descclassname">file_manage.</code><code class="sig-name descname">batch_rename_folder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dir</span></em>, <em class="sig-param"><span class="n">re_match</span></em>, <em class="sig-param"><span class="n">str_new</span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manage.batch_rename_folder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change the folder name using regular expression.
+it do same as using e.g. re.sub(‘-v([0-9]*)’ ,’-v800’, path)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>string</em>) – a dir.txt file save the directory of the folders to be named</p></li>
+<li><p><strong>re_match</strong> (<em>string</em>) – regular express to locate the string to be changed.</p></li>
+<li><p><strong>str_new</strong> (<em>string</em>) – new string to change the string in the old folders name</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="file_manage.copy_filter">
+<code class="sig-prename descclassname">file_manage.</code><code class="sig-name descname">copy_filter</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dir</span></em>, <em class="sig-param"><span class="n">output_dir</span></em>, <em class="sig-param"><span class="n">include_file_type</span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manage.copy_filter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copy files with certain extensions using bash command: rsync
+Default setting is to copy
+todo: add exclude type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>input_dir</strong> (<em>string</em>) – the directory of the folder that original files in, end with /</p>
+</dd>
+</dl>
+<p>e.g. /root/mnt/WF/Joost_shared/ /root/mnt/To-laptop/Joost_shared/</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output_dir</strong> (<em>string</em>) – the directory of the folder that target files to be moved in</p></li>
+<li><p><strong>include_file_type</strong> (<em>tuple</em>) – a tuple of the extenstion of files to be moved</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="file_manage.dir_list">
+<code class="sig-prename descclassname">file_manage.</code><code class="sig-name descname">dir_list</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dir</span></em>, <em class="sig-param"><span class="n">output_path</span></em>, <em class="sig-param"><span class="n">only_folder</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">certain_file</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manage.dir_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a dir_list.txt (you shold name this in the output_path) for the subfolders and/or files in a folder.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>string</em>) – the directory of the folder that subfolders or files in</p></li>
+<li><p><strong>output_dir</strong> (<em>string</em>) – the directory of a file which contains the directorids. e.g. XXX/XXX.dir_list.txt</p></li>
+<li><p><strong>only_folder</strong> (<em>boolean</em>) – True-only export the subfolder directory.</p></li>
+<li><p><strong>certain_file</strong> (<em>str</em>) – default is False to include all files/folder. Specify a file name or extains as a filter.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt id="file_manage.folder_tree">
+<code class="sig-prename descclassname">file_manage.</code><code class="sig-name descname">folder_tree</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">input_dir</span></em>, <em class="sig-param"><span class="n">folder_names</span></em><span class="sig-paren">)</span><a class="headerlink" href="#file_manage.folder_tree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create subfolders based on a give list of folder names.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>input_dir</strong> (<em>string</em>) – the directory of the folder that subfolders or files in</p></li>
+<li><p><strong>folder_names</strong> (<em>list</em>) – a list of strings to store the names of desired subfolders.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
 </div>
 
 

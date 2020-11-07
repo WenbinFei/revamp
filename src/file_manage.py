@@ -8,15 +8,15 @@
 Batch deal with your files.
 """
 import os
-import logging
+import logging.config
 import time
 import traceback
 import shutil
 import re
 
 # Create logger
-logging.config.fileConfig(fname='logging.ini')
-logger = logging.getLogger(__name__)
+import logger_ini
+logger = logger_ini.logger_run()
 
 def folder_tree(input_dir, folder_names):
     """

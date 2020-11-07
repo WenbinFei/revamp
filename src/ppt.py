@@ -20,8 +20,8 @@ import traceback
 import image
 
 # Create logger
-logging.config.fileConfig(fname='logging.ini')
-logger = logging.getLogger(__name__)
+import logger_ini
+logger = logger_ini.logger_run()
 
 
 def ppt2tif(ppt_path, crop = True, long_image = False ):

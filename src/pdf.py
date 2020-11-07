@@ -15,8 +15,8 @@ import time
 import traceback
 
 # Create logger
-logging.config.fileConfig(fname='logging.ini')
-logger = logging.getLogger(__name__)
+import logger_ini
+logger = logger_ini.logger_run()
 
 # Create functions
 
