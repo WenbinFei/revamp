@@ -18,6 +18,32 @@ import re
 logging.config.fileConfig(fname='logging.ini')
 logger = logging.getLogger(__name__)
 
+def folder_tree(input_dir, folder_names):
+    """
+    Create subfolders based on a give list of folder names.   
+
+    :type input_dir: string
+    :param input_dir: the directory of the folder that subfolders or files in    
+
+    :type folder_names: list
+    :param folder_names: a list of strings to store the names of desired subfolders.
+    """
+    start_time = time.time()
+    try:
+        path_list = [line.strip() for line in open(input_dir,'r')]
+        for path in path_list:
+            for name in folder_names:
+                path_subfolder = path + '/' + name
+                if not os.path.exists(path_subfolder):
+                    os.makedirs(path_subfolder) 
+    except: 
+        logger.error('[folder_tree failed]')
+        logger.error(traceback.format_exc())
+    else:
+        stop_time = time.time()
+        dt = stop_time - start_time
+        logger.info("[folder_tree completed] {} in {:.4f} s".format(input_dir, dt))
+
 def dir_list(input_dir, output_path, only_folder=True, certain_file=False):
     """
     Create a dir_list.txt (you shold name this in the output_path) for the subfolders and/or files in a folder.    
@@ -162,4 +188,5 @@ if __name__ == '__main__':
     # copy_filter(r"/mnt/c/Wenbin/GitHub/revamp/tests/individual/", r"/mnt/c/Wenbin/GitHub/revamp/tests/individual-copy_filter/", ['txt', 'JPG'])
     # batch_rename_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", '-v([0-9]*)', '-v800')
     # batch_rename_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['txt'], '-v([0-9]*)', '-v200')
-    dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt')
+    # dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt')
+    folder_tree(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['a', 'b', 'c'])
