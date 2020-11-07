@@ -14,12 +14,14 @@ Language: Bash & Python3*
 
 
 ## File Management on Operating System
-### copy filter: copy files with certern extentions
+### Copy filter: copy files with certern extentions
 Use bash command rsync
 The bash commad can also be used directly on the termnial by typing or create a .sh file.
 ```
 rsync -a --include '*/' --include '*.<file_extension_1>' --include '*.file_extension_2' --include '*.file_extension_3' --exclude '*' <source_folder> <target_folder>
 ```
+### Batch rename file and folder
+it supoorts to rename files with a certain extension in a folder
 
 ## PDF 
 ### PDF compress
