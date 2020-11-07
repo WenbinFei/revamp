@@ -11,10 +11,12 @@ Welcome to Revamp's documentation!
 
    file_manage
    image
+   logger_ini
    main
    markdown
    pdf
    ppt
+
 
 
 Indices and tables
