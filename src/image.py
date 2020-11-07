@@ -8,7 +8,6 @@
 Have fun with images.
 """
 
-from PIL import Image
 import os
 import logging.config
 import time

@@ -9,15 +9,16 @@ Run Revamp - software for file management and dealing with files
 """
 import os
 
-################ Example: crop journal papers #############################
+########## Example: crop all figures in a folder for journal papers ##########
+########## 
 
 
-################ Test pdf.py ##############################
+########## Test pdf.py #############################
 # import pdf
 # decrypte('../tests/in.pdf', '../tests/out.pdf')
 # pdf.decrypte('../tests/in.pdf', '../tests/out.pdf')
 	
-################ Test ppt.py #############################
+########## Test ppt.py #############################
 ## todo: the strange thinng is when the powerpoint is open.
 ## but when run the smae code on the shell, it works.
 # import ppt
