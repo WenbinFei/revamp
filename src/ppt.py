@@ -47,8 +47,8 @@ def ppt2tif(ppt_path, crop = True, long_image = False ):
         ppt.SaveAs(output_path, 17)  # 17 is the id of jpg, 
         ppt_app.Quit() 
     except: 
-        logger.error(traceback.format_exc())
-        logger.error('ppt has not been opened correctly')
+        logger.error('[ppt2tif failed] ppt has not been opened correctly')
+        logger.error(traceback.format_exc())        
         raise
     else: 
         stop_time = time.time()
