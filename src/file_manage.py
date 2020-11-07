@@ -225,11 +225,42 @@ def batch_delete_folder(input_dir, sub_folder = False):
         dt = stop_time - start_time
         logger.info("[batch_delete_folder completed] {} in {:.4f} s".format(input_dir, dt))
 
+def batch_delete_file(input_dir, file_limit): 
+    """
+    Batch delete certatin files in a folder.
+
+    :type input_dir: string
+    :param input_dir: a dir_list.txt file save the directory of the folders to be named
+
+    :type file_limit: list
+    :param file_limit: a list of certain extension of file, or the filename
+    """
+    start_time = time.time()
+    try:
+        path_list = [line.strip() for line in open(input_dir,'r')]        
+        for path in path_list:      
+                for filename in os.listdir(path):
+                    for term in file_limit:
+                        if filename.endswith (term):
+                            file_path = path + '/' + filename
+                            os.remove(file_path)
+                            logger.info("[delete_file] {}".format(file_path))
+
+
+    except: 
+        logger.error('[batch_delete_folder failed]')
+        logger.error(traceback.format_exc())
+    else:
+        stop_time = time.time()
+        dt = stop_time - start_time
+        logger.info("[batch_delete_folder completed] {} in {:.4f} s".format(input_dir, dt))
+
 if __name__ == '__main__':
     # test copy_filter on ubuntu. I used WSL on my windows computer
     # copy_filter(r"/mnt/c/Wenbin/GitHub/revamp/tests/individual/", r"/mnt/c/Wenbin/GitHub/revamp/tests/individual-copy_filter/", ['txt', 'JPG'])
     # batch_rename_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", '-v([0-9]*)', '-v800')
     # batch_rename_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['txt'], '-v([0-9]*)', '-v200')
-    dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt', True)
+    # dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt', True)
     # folder_tree(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['a', 'b', 'c'])
     # batch_delete_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt")
+    batch_delete_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['.txt'])
