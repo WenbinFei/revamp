@@ -8,7 +8,7 @@
 Batch deal with your files.
 """
 import os
-import logging.config
+import logging
 import time
 import traceback
 import shutil
@@ -57,8 +57,8 @@ def dir_list(input_dir, output_path, only_folder=True, certain_file=False):
     :type only_folder: boolean
     :param only_folder: True-only export the subfolder directory.
 
-    :type only_folder: str
-    :param only_folder: default is False to include all files/folder. Specify a file name or extains as a filter.
+    :type certain_file: str
+    :param certain_file: default is False to include all files/folder. Specify a file name or extains as a filter.
     """
     start_time = time.time()
     try:

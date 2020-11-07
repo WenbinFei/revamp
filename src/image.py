@@ -5,13 +5,13 @@
 # All rights reserved.
 
 """
-Have fun with images.
+Have fun with images
+====================
 """
-
-import os
 import logging.config
 import time
 import traceback
+import os
 import numpy as np
 import cv2
 

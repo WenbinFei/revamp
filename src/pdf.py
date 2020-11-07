@@ -5,7 +5,8 @@
 # All rights reserved.
 
 """
-Have fun with PDF files.
+Have fun with PDF files
+=======================
 """
 
 import os
@@ -16,7 +17,6 @@ import traceback
 # Create logger
 logging.config.fileConfig(fname='logging.ini')
 logger = logging.getLogger(__name__)
-
 
 # Create functions
 
@@ -62,6 +62,7 @@ def decrypte(input_file, output_file):
     :type output_file: string
     :param output_file: the directory of the PDF after decryption
     """
+    start_time = time.time()
     try:
         import pikepdf                  
     except: 
@@ -75,7 +76,7 @@ def decrypte(input_file, output_file):
 
 # Test functions
 if __name__ == '__main__':
-    # decrypte('../tests/in.pdf', '../tests/out.pdf')
-    compress('../tests/in.pdf', '../tests/out.pdf', 100)
+    decrypte('../tests/in.pdf', '../tests/out.pdf')
+    # compress('../tests/in.pdf', '../tests/out.pdf', 100)
 
 

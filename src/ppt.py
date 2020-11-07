@@ -5,7 +5,8 @@
 # All rights reserved.
 
 """
-Have fun with PowpwerPoint files.
+Have fun with PowpwerPoint files
+=================================
 todo: the strange thinng is when the powerpoint is open.
 but when run the smae code on the shell, it works.
 """
@@ -16,11 +17,12 @@ import logging.config
 import time
 import traceback
 
+import image
+
 # Create logger
 logging.config.fileConfig(fname='logging.ini')
 logger = logging.getLogger(__name__)
 
-import image
 
 def ppt2tif(ppt_path, crop = True, long_image = False ):
     """

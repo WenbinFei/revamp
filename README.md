@@ -23,6 +23,8 @@ rsync -a --include '*/' --include '*.<file_extension_1>' --include '*.file_exten
 ### Batch rename file and folder
 it supoorts to rename files with a certain extension in a folder
 
+Check the code manual to see more functions.
+
 ## PDF 
 ### PDF compress
 *If you do not worry about safety, you can do the PDF compression on the website [PDF Compressor](https://pdfcompressor.com/)*

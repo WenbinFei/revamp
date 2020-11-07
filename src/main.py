@@ -6,6 +6,7 @@
 
 """
 Run Revamp - software for file management and dealing with files
+================================================================
 """
 import os
 
@@ -14,9 +15,9 @@ import os
 
 
 ########## Test pdf.py #############################
-# import pdf
-# decrypte('../tests/in.pdf', '../tests/out.pdf')
-# pdf.decrypte('../tests/in.pdf', '../tests/out.pdf')
+import pdf
+
+pdf.decrypte('../tests/in.pdf', '../tests/out.pdf')
 	
 ########## Test ppt.py #############################
 ## todo: the strange thinng is when the powerpoint is open.

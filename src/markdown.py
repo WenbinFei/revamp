@@ -6,7 +6,15 @@
 
 """
 Have fun with Markdwon.
+=======================
 """
+import logging.config
+import time
+import traceback
+
+# Create logger
+logging.config.fileConfig(fname='logging.ini')
+logger = logging.getLogger(__name__)
 
 ####################################
 # generate the Table of Content for Markdown
@@ -23,40 +31,51 @@ def toc(inFile, outFile=False, to_print=True):
     :type to_print: boolean
     :param to_print: the default is True to print on the screen
     """
-    mdFile = open(inFile, 'r')
-    toc = []
-    levels = [0,0,0,0]
-    if isinstance(outFile, str) == True:
-        newFile = open(outFile, 'w')
-    tempFile = []
-    tocLoc = 0
-    partOfToc = False
-    
-    for line in mdFile:
-        if partOfToc and line != '\n':
-            continue
-        else:
-            partOfToc = False
-        if 'Table of Contents' in line:
-            tocLoc = len(tempFile) + 1
-            partOfToc = True
-        elif line[0] == '#':
-            secId = buildToc(line, toc, levels)
-            line = addSectionTag(cleanLine(line), secId) + '\n'
-        tempFile.append(line)
-
-    for line in toc:
-        tempFile.insert(tocLoc, line)
-        tocLoc += 1
-        if to_print == True:
-            print(line.rstrip('\n'))
-
-    for line in tempFile:
+    start_time = time.time()
+    try: 
+        mdFile = open(inFile, 'r')
+        toc = []
+        levels = [0,0,0,0]
         if isinstance(outFile, str) == True:
-            newFile.write(line)
+            newFile = open(outFile, 'w')
+        tempFile = []
+        tocLoc = 0
+        partOfToc = False
         
-    mdFile.close()
-    newFile.close()
+        for line in mdFile:
+            if partOfToc and line != '\n':
+                continue
+            else:
+                partOfToc = False
+            if 'Table of Contents' in line:
+                tocLoc = len(tempFile) + 1
+                partOfToc = True
+            elif line[0] == '#':
+                secId = buildToc(line, toc, levels)
+                line = addSectionTag(cleanLine(line), secId) + '\n'
+            tempFile.append(line)
+
+        for line in toc:
+            tempFile.insert(tocLoc, line)
+            tocLoc += 1
+            if to_print == True:
+                print(line.rstrip('\n'))
+
+        for line in tempFile:
+            if isinstance(outFile, str) == True:
+                newFile.write(line)
+            
+        mdFile.close()
+        if isinstance(outFile, str) == True:            
+            newFile.close()
+    except: 
+        logger.error('[toc failed]')
+        logger.error(traceback.format_exc())        
+        raise
+    else: 
+        stop_time = time.time()
+        dt = stop_time - start_time
+        logger.info(f"[toc completed] {inFile} in {round(dt,4)} s")
 
 def addSectionTag(line, secId):
     startIndex = line.find(' ')
@@ -102,6 +121,6 @@ def removeAnchors(text):
 
 if __name__ == "__main__":
     import sys
-    toc(sys.argv[1], sys.argv[2], True)
+    toc('../README.md', False, True)
 
 
