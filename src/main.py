@@ -50,9 +50,9 @@ def replace_original_image(input_dir, marker):
 			os.remove(image_path_orig)
 			os.rename(image_path, image_path_orig)			
 
-# to crop figures and replace the original figures			
-input_dir = r"C:\Wenbin\GitHub\revamp\tests\individual"
-crop_all_fig_in_folder(input_dir)
+###### to crop figures and replace the original figures			
+# input_dir = r"C:\Wenbin\GitHub\revamp\tests\individual"
+# crop_all_fig_in_folder(input_dir)
 # replace_original_image(input_dir, '_cropped')
 
 
