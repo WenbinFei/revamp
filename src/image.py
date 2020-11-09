@@ -36,10 +36,9 @@ def crop_journal_image(path):
                 store_row.append(i)
 
         # check whether the image only occupies one-column in the journal
-        # by checking either lefor or right part acroosing 1/4, 1/2 and 3/4 pixels are white
-        height = len(store_row)
-        check_points = [store_row[int(height/4)], store_row[int(height/4)], store_row[int(height*0.75)]]      
-        check_1_col = img[check_points, :]
+        # by checking either lef or right part acroosing the whole page is white        
+        check_points = store_row
+        check_1_col = img[store_row, :]
         column_num = img.shape[1] # only use one row to check to save time
         img_row_spl = np.hsplit(check_1_col, [column_num//2]) # only check only part
         img_row_left = np.all(img_row_spl[0] == 255) # whether the left part is empty

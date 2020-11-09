@@ -9,6 +9,10 @@ Run Revamp - software for file management and dealing with files
 ================================================================
 """
 import os
+import logging.config
+import time
+import traceback
+
 
 #### Template ################################
 ##### Crop all figures in a folder for journal papers ##########
@@ -44,12 +48,12 @@ def replace_original_image(input_dir, marker):
 			image_path = input_dir + '/' + term
 			image_path_orig = input_dir + '/' + original_file
 			os.remove(image_path_orig)
-			os.rename(image_path, image_path_orig)
+			os.rename(image_path, image_path_orig)			
 
 # to crop figures and replace the original figures			
 input_dir = r"C:\Wenbin\GitHub\revamp\tests\individual"
-# crop_all_fig_in_folder(input_dir)
-replace_original_image(input_dir, '_cropped')
+crop_all_fig_in_folder(input_dir)
+# replace_original_image(input_dir, '_cropped')
 
 
 
