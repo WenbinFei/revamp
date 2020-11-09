@@ -66,7 +66,7 @@ def crop_journal_image(path):
 
         # the cropped file with exported with a tailed _cropped afte the original name
         path_split = path.rsplit('.', 1)    
-        output_path = path_split[0] + '_croped.' +   path_split[-1]    
+        output_path = path_split[0] + '_cropped.' +   path_split[-1]    
         cv2.imwrite(output_path, crop_img)
 
 def resize_image(path, percentage):
