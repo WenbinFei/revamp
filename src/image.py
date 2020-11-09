@@ -32,22 +32,26 @@ def crop_journal_image(path):
         img = cv2.imread(path)    
         for i in range(img.shape[0]):
             img_row = img[i]
-            if(np.any(img_row<255)):
+            if(np.any(img_row<255)):                
                 store_row.append(i)
 
-        # check whether the image only occupies one-column in the journal  
-        check_1_col = img[store_row[0]] 
+        # check whether the image only occupies one-column in the journal
+        # by checking either lefor or right part acroosing 1/4, 1/2 and 3/4 pixels are white
+        height = len(store_row)
+        check_points = [store_row[int(height/4)], store_row[int(height/4)], store_row[int(height*0.75)]]      
+        check_1_col = img[check_points, :]
         column_num = img.shape[1] # only use one row to check to save time
         img_row_spl = np.hsplit(check_1_col, [column_num//2]) # only check only part
         img_row_left = np.all(img_row_spl[0] == 255) # whether the left part is empty
         img_row_right = np.all(img_row_spl[1] == 255) # whether the right part is empty
         if(img_row_right):
             store_col = range(column_num//2 + 1) # only keep the index of the left part
+            crop_img = img[store_row][:, store_col]            
         elif(img_row_left):
             store_col = range(column_num//2, icolumn_num) # only keep the index of the right part
-        else:
-            store_col = ':' # keep the whole line
-        crop_img = img[store_row][:, store_col]
+            crop_img = img[store_row][:, store_col]
+        else:            
+            crop_img = img[store_row][:] # keep the whole line
     except: 
         logger.error('[crop_journal_image failed]')
         logger.error(traceback.format_exc())        
@@ -55,7 +59,7 @@ def crop_journal_image(path):
     else: 
         stop_time = time.time()
         dt = stop_time - start_time
-        logger.info(f"[crop_journal_image completed] {path} in {dt} s")
+        logger.info(f"[crop_journal_image completed] {path} in {round(dt,4)} s")
         
         # cv2.imshow('cropped', crop_img)
         # cv2.waitKey(0) 
