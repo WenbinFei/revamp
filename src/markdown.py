@@ -21,6 +21,9 @@ logger = logger_ini.logger_run()
 def toc(inFile, outFile=False, to_print=True):
     """
     Generate the Table of Content for Markdown
+    todo: not generating the heading according to the comments # in codes
+    using the following online tool:
+    https://ecotrust-canada.github.io/markdown-toc/
 
     :type input_file: string
     :param input_file: the directory of the input markdown
@@ -121,6 +124,8 @@ def removeAnchors(text):
 
 if __name__ == "__main__":
     import sys
-    toc('../README.md', False, True)
+    # toc('../README.md', False, True)
+    toc(r"C:\Wenbin\GitHub\Lynx\docs\Image-processing_notes.md", False, True)
+    
 
 
