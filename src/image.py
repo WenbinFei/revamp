@@ -125,7 +125,7 @@ def generate_long_image(output_path):
     Generate long image by combing individual images
 
     :type output_path: string
-    :param input_file: the directory of the iamges to be saved 
+    :param output_path: the directory of the iamges to be saved 
     """
     try:
         picture_path = output_path[:output_path.rfind('.')]
@@ -144,7 +144,6 @@ def generate_long_image(output_path):
 
         long_canvas.save(os.path.join(last_dir, 'long-image.tif'))  # save as long figure
         logger.info(f"[generate_long_image completed]")
-
 
 if __name__ == "__main__":
     # crop_journal_image(r"../tests/individual/Slide2.Tif")

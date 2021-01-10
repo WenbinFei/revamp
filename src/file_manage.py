@@ -196,6 +196,40 @@ def batch_rename_file(input_dir, file_extension, re_match, str_new):
         dt = stop_time - start_time
         logger.info("[batch_rename_file completed] {} in {:.4f} s".format(input_dir, dt))
 
+def rename_file_sequence(folder_path, file_extension, file_prefix): 
+    """
+    Change the the name of files with suquence
+    It could be used to renane the images for your journal form Fig1 to FigXX.tif     
+
+    :type folder_path: string
+    :param folder_path: the directory of the folders containing the certain files
+
+    :type file_extension: list
+    :param file_extension: e.g. .tif
+
+    :type file_prefix: string
+    :param file_prefix: the prefix that you want the generated files have.
+    """
+
+    start_time = time.time()
+    try:
+        i = 0
+        for filename in os.listdir(folder_path).sort():
+            if filename.endswith(file_extension):
+                i = i+1
+                new_name = file_prefix + str(i) + '.' + file_extension
+                old_file_path = folder_path + '/' + filename
+                new_file_path = folder_path + '/' + new_name
+                os.rename(old_file_path, new_file_path)
+                logger.info("[rename_file completed] {} ".format(old_file_path))
+    except: 
+        logger.error('[batch_rename_file failed]')
+        logger.error(traceback.format_exc())
+    else:
+        stop_time = time.time()
+        dt = stop_time - start_time
+        logger.info("[batch_rename_file completed] {} in {:.4f} s".format(input_dir, dt))
+
 def batch_delete_folder(input_dir, sub_folder = False):    
     """
     Batch delete folders. Or specify a sub_folder to be deleted
@@ -263,4 +297,5 @@ if __name__ == '__main__':
     # dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt', True)
     # folder_tree(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['a', 'b', 'c'])
     # batch_delete_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt")
-    batch_delete_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['.txt'])
+    # batch_delete_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['.txt'])
+    rename_file_sequence(r'C:\Users\wenbinf1\OneDrive - The University of Melbourne\WF_share_with_GAN\1_Journal-papers\4-3D-particle_shape-network-features\Figures and tables\Figures-indivuidual_files', 'TIF', 'Fig ')
