@@ -3,8 +3,8 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - ca-certificates=2020.6.20=hecda079_0
-  - certifi=2020.6.20=py38h9bdc248_2
+  - ca-certificates=2021.7.5=haa95532_1
+  - certifi=2021.5.30=py38haa95532_0
   - freeglut=3.0.0=h6538335_1005
   - freetype=2.10.4=h546665d_0
   - icu=67.1=h33f27b4_0
@@ -22,9 +22,10 @@ dependencies:
   - libwebp-base=1.1.0=h8ffe710_3
   - lz4-c=1.9.2=h62dcd97_2
   - mkl=2020.2=256
+  - natsort=7.1.1=pyhd3eb1b0_0
   - numpy=1.19.4=py38h0cc643e_0
   - opencv=4.5.0=py38_2
-  - openssl=1.1.1h=he774522_0
+  - openssl=1.1.1l=h2bbff1b_0
   - pip=20.2.4=py38haa95532_0
   - py-opencv=4.5.0=py38h1cdfbd6_2
   - python=3.8.5=h5fd99cc_1

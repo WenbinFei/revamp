@@ -13,6 +13,8 @@ import time
 import traceback
 import shutil
 import re
+from natsort import natsorted, ns
+
 
 # Create logger
 import logger_ini
@@ -62,14 +64,16 @@ def dir_list(input_dir, output_path, only_folder=True, certain_file=False):
     """
     start_time = time.time()
     try:
-        sub_dirs = os.listdir(input_dir)
-        print(sub_dirs)
+        sub_dirs = os.listdir(input_dir)        
+        to_remove = []
         if only_folder == True:
-            for term in sub_dirs:
-                print (term)
+            for term in sub_dirs:                
                 if ("." in term):  #files usually has an estension name with a symbol '.'
-                    sub_dirs.remove(term)
-        print(sub_dirs)
+                    to_remove.append(term)
+        for term in to_remove:                    
+            sub_dirs.remove(term)   
+        sub_dirs = natsorted(sub_dirs, key=lambda y: y.lower())      
+
         counter = 0
         with open(output_path,'w') as f:
             while counter != (len(sub_dirs)) - 1: 
@@ -294,8 +298,8 @@ if __name__ == '__main__':
     # copy_filter(r"/mnt/c/Wenbin/GitHub/revamp/tests/individual/", r"/mnt/c/Wenbin/GitHub/revamp/tests/individual-copy_filter/", ['txt', 'JPG'])
     # batch_rename_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", '-v([0-9]*)', '-v800')
     # batch_rename_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['txt'], '-v([0-9]*)', '-v200')
-    # dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt', True)
+    dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt', True)
     # folder_tree(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['a', 'b', 'c'])
     # batch_delete_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt")
     # batch_delete_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['.txt'])
-    rename_file_sequence(r'C:\Users\wenbinf1\OneDrive - The University of Melbourne\WF_share_with_GAN\1_Journal-papers\4-3D-particle_shape-network-features\Figures and tables\Figures-indivuidual_files', 'TIF', 'Fig ')
+    # rename_file_sequence(r'C:\Users\wenbinf1\OneDrive - The University of Melbourne\WF_share_with_GAN\1_Journal-papers\4-3D-particle_shape-network-features\Figures and tables\Figures-indivuidual_files', 'TIF', 'Fig ')

@@ -8,11 +8,12 @@
 Run Revamp - software for file management and dealing with files
 ================================================================
 """
+# import file_manage
+import file_manager
 import os
 import logging.config
 import time
 import traceback
-import image
 
 
 #### Template ################################
@@ -56,9 +57,25 @@ def replace_original_image(input_dir, marker):
 
 
 ##### to crop figures and replace the original figures			
-input_dir = "C:/Users/wenbinf1/OneDrive - The University of Melbourne/WF_share_with_GAN/1_Journal-papers/4-3D-particle_shape-network-features/Figures and tables/Figures-indivuidual_files"
-crop_all_fig_in_folder(input_dir)
-replace_original_image(input_dir, '_cropped')
+# input_dir = r"C:\Users\wenbinf1\OneDrive - The University of Melbourne\WF_share_with_GAN\1_Journal-papers\1_shortest-path-heat\Figures\Figures - Individual Files"
+# crop_all_fig_in_folder(input_dir)
+# replace_original_image(input_dir, '_cropped')
+
+
+##### Create dir_list.txt #################
+input_dirs = [line.strip() for line in open('C:/Users/wenbinf1/OneDrive - The University of Melbourne/WF_share_with_GAN/1_Journal-papers/2-stress-anisotropy/Data/2_network-features/dir_list_cases.txt','r')]
+
+for case in input_dirs:
+	input_dir_x = case + '/network-feature/data-x'
+	input_dir_y = case + '/network-feature/data-y'
+	input_dir_z = case + '/network-feature/data-z'
+	output_dir_x = input_dir_x + '/dir_list.txt'
+	output_dir_y = input_dir_y + '/dir_list.txt'
+	output_dir_z = input_dir_z + '/dir_list.txt'
+
+	file_manager.dir_list(input_dir_x, output_dir_x, True)
+	file_manager.dir_list(input_dir_y, output_dir_y, True)
+	file_manager.dir_list(input_dir_z, output_dir_z, True)
 
 
 #### Pdf decrypte ############################
