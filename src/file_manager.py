@@ -263,6 +263,36 @@ def batch_delete_folder(input_dir, sub_folder = False):
         dt = stop_time - start_time
         logger.info("[batch_delete_folder completed] {} in {:.4f} s".format(input_dir, dt))
 
+def batch_delet_keep_folder(input_dir, sub_folder = False):    
+    """
+    Batch delete folders while keeping some folders to be kept
+
+    :type input_dir: string
+    :param input_dir: a dir_list.txt file save the directory of the folders to be named
+
+    :type sub_folder: list
+    :param sub_folder: default is False not for subfolder.
+     Giving a list of subfolders to keep
+    """
+    start_time = time.time()
+    try:
+        path_list = [line.strip() for line in open(input_dir,'r')]        
+        for path in path_list:
+            for folder in os.listdir(path):                        
+                if isinstance(folder, str):                                  
+                    if folder in sub_folder:
+                        continue
+                    else:
+                        rm_folder = path + '/' + folder
+                        shutil.rmtree(rm_folder) 
+    except: 
+        logger.error('[batch_delet_keep_folder failed]')
+        logger.error(traceback.format_exc())
+    else:
+        stop_time = time.time()
+        dt = stop_time - start_time
+        logger.info("[batch_delet_keep_folder completed] {} in {:.4f} s".format(input_dir, dt))
+
 def batch_delete_file(input_dir, file_limit): 
     """
     Batch delete certatin files in a folder.
@@ -298,8 +328,9 @@ if __name__ == '__main__':
     # copy_filter(r"/mnt/c/Wenbin/GitHub/revamp/tests/individual/", r"/mnt/c/Wenbin/GitHub/revamp/tests/individual-copy_filter/", ['txt', 'JPG'])
     # batch_rename_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", '-v([0-9]*)', '-v800')
     # batch_rename_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['txt'], '-v([0-9]*)', '-v200')
-    dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt', True)
+    # dir_list(r'C:\Wenbin\GitHub\revamp\tests', r'C:\Wenbin\GitHub\revamp\tests\dir_list.txt', True)
     # folder_tree(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['a', 'b', 'c'])
     # batch_delete_folder(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt")
     # batch_delete_file(r"C:\Wenbin\GitHub\revamp\tests\dir_list.txt", ['.txt'])
     # rename_file_sequence(r'C:\Users\wenbinf1\OneDrive - The University of Melbourne\WF_share_with_GAN\1_Journal-papers\4-3D-particle_shape-network-features\Figures and tables\Figures-indivuidual_files', 'TIF', 'Fig ')
+    batch_delet_keep_folder(r'C:/Users/wenbinf1/The University of Melbourne/WenbinFeiMDAPCollab - General/Data/CT_uncemented/dir_list_remove.txt', sub_folder = ['watershed'])

@@ -50,32 +50,36 @@ def replace_original_image(input_dir, marker):
 			original_file = term.replace(marker,'')
 			image_path = input_dir + '/' + term
 			image_path_orig = input_dir + '/' + original_file
-			os.remove(image_path_orig)
-			os.rename(image_path, image_path_orig)	
+			os.remove(image_path_orig)			
+			# os.rename(image_path, image_path_orig)	
+
+			new_name = original_file.replace('Slide','Fig')			
+			new_name_path = input_dir + '/' + new_name
+			os.rename(image_path, new_name_path)	
 
 
 
 
 ##### to crop figures and replace the original figures			
-# input_dir = r"C:\Users\wenbinf1\OneDrive - The University of Melbourne\WF_share_with_GAN\1_Journal-papers\1_shortest-path-heat\Figures\Figures - Individual Files"
-# crop_all_fig_in_folder(input_dir)
-# replace_original_image(input_dir, '_cropped')
+input_dir = r"C:\Users\wenbinf1\OneDrive - The University of Melbourne\WF_share_with_GAN\1_Journal-papers\1_shortest-path-heat\Figures\Figures - Individual Files"
+crop_all_fig_in_folder(input_dir)
+replace_original_image(input_dir, '_cropped')
 
 
 ##### Create dir_list.txt #################
-input_dirs = [line.strip() for line in open('C:/Users/wenbinf1/OneDrive - The University of Melbourne/WF_share_with_GAN/1_Journal-papers/2-stress-anisotropy/Data/2_network-features/dir_list_cases.txt','r')]
+# input_dirs = [line.strip() for line in open('C:/Users/wenbinf1/OneDrive - The University of Melbourne/WF_share_with_GAN/1_Journal-papers/2-stress-anisotropy/Data/2_network-features/dir_list_cases.txt','r')]
 
-for case in input_dirs:
-	input_dir_x = case + '/network-feature/data-x'
-	input_dir_y = case + '/network-feature/data-y'
-	input_dir_z = case + '/network-feature/data-z'
-	output_dir_x = input_dir_x + '/dir_list.txt'
-	output_dir_y = input_dir_y + '/dir_list.txt'
-	output_dir_z = input_dir_z + '/dir_list.txt'
+# for case in input_dirs:
+# 	input_dir_x = case + '/network-feature/data-x'
+# 	input_dir_y = case + '/network-feature/data-y'
+# 	input_dir_z = case + '/network-feature/data-z'
+# 	output_dir_x = input_dir_x + '/dir_list.txt'
+# 	output_dir_y = input_dir_y + '/dir_list.txt'
+# 	output_dir_z = input_dir_z + '/dir_list.txt'
 
-	file_manager.dir_list(input_dir_x, output_dir_x, True)
-	file_manager.dir_list(input_dir_y, output_dir_y, True)
-	file_manager.dir_list(input_dir_z, output_dir_z, True)
+# 	file_manager.dir_list(input_dir_x, output_dir_x, True)
+# 	file_manager.dir_list(input_dir_y, output_dir_y, True)
+# 	file_manager.dir_list(input_dir_z, output_dir_z, True)
 
 
 #### Pdf decrypte ############################
